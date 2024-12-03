@@ -2,27 +2,43 @@
 import styled from "styled-components"
 import "styled-reset"
 
-const page = () => {
+const Page = () => {
   return (
     <Wrapper>
       <Header>
-        <h1>Top</h1>
+        <h1>トップページ</h1>
       </Header>
+      <Content>
+        <h2>コンテンツ</h2>
+      </Content>
     </Wrapper>
   )
 }
 
-export default page
+export default Page
 
 const Wrapper = styled.div`
   width: 100%;
   height: 100vh;
   background-color: #ffffe0;
-  font-family: "Roboto-Regular"
+  font-family: var(--font-roboto-regular), var(--font-noto-sans-jp), sans-serif;
 `
 
-const Header = styled.header`
-  background-color: #ffffe0;
+const Header = styled.div`
+  width: 80%;
+  max-width: 960px;
+  min-width: 600px;
+  height: 100px;
+  margin: 0 auto;
+  color: #222;
+  padding: 20px;
+`
+
+const Content = styled.div`
+  width: 80%;
+  max-width: 960px;
+  min-width: 600px;
+  margin: 0 auto;
   color: #222;
   padding: 20px;
 `
