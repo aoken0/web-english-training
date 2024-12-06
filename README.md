@@ -45,6 +45,16 @@ firebaseの設定等
 firebase init
 ```
 
+### firestore
+
+参考ページ
+* 初期設定は以下のいずれのリンクにも記載あり
+* [データの追加](https://firebase.google.com/docs/firestore/manage-data/add-data?hl=ja)
+* [データの取得](https://firebase.google.com/docs/firestore/query-data/get-data?hl=ja#web_2)
+
+
+
+
 ## Next.js
 
 ### 設定等
