@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useRouter } from "next/navigation";
 
 // Propsの型定義
 type GlobalWrapperProps = {
@@ -8,10 +9,15 @@ type GlobalWrapperProps = {
 };
 
 const GlobalWrapper: React.FC<GlobalWrapperProps> = ({ header, children }) => {
+  const router = useRouter();
+
   return (
     <Wrapper>
       <Header>
         {header}
+        <div>
+          <button onClick={() => router.push("/")}>ログアウト</button>
+        </div>
       </Header>
       {children}
     </Wrapper>
@@ -88,6 +94,21 @@ const Header = styled.div`
   color: #222;
   padding: 30px 20px;
   font-size: 32px;
+  display: flex;
+  justify-content: space-between;
+  button {
+    width: 120px;
+    height: 40px;
+    border-radius: 20px;
+    border: 2px solid #222;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all .25s ease-in-out;
+    &:hover {
+      background-color: #444;
+      color: #fff;
+    }
+  }
 `
 
 const LRContentWrapperStyled = styled.div`
