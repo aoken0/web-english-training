@@ -52,8 +52,8 @@ const ToeicGrammar = () => {
               </table>
             </HistoryWrapper>
             <GraphWrapper>
-              <Graph percent={"50%"}><div></div><p>解答率</p></Graph>
-              <Graph percent={"100%"}><div></div><p>正答率</p></Graph>
+              <Graph $percent={"50%"}><div></div><p>解答率</p></Graph>
+              <Graph $percent={"100%"}><div></div><p>正答率</p></Graph>
             </GraphWrapper>
           </RContentArea>
         </RContentWrapper>
@@ -106,7 +106,7 @@ const GraphWrapper = styled.div`
   // background-color: #eee;
 `
 
-const Graph = styled.div<{ percent?: string }>`
+const Graph = styled.div<{ $percent?: string }>`
   width: 45%;
   height: 100%;
   padding-top: 10px;
@@ -126,13 +126,13 @@ const Graph = styled.div<{ percent?: string }>`
       bottom: 0;
       left: 0;
       width: 100%;
-      height: ${({ percent }) => percent ? `${percent}` : '0'};
+      height: ${({ $percent }) => $percent ? `${$percent}` : '0'};
       background-color: #555;
     }
     &::after {
-      content: ${({ percent }) => percent ? `"${percent}"` : ''};
+      content: ${({ $percent }) => $percent ? `"${$percent}"` : ''};
       position: absolute;
-      bottom: ${({ percent }) => percent ? `${percent}` : '0'};
+      bottom: ${({ $percent }) => $percent ? `${$percent}` : '0'};
       left: 50%;
       transform: translateX(-50%);
       font-size: 14px;

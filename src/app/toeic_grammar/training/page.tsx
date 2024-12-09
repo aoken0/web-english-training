@@ -3,6 +3,9 @@ import { useState } from "react"
 import { GlobalWrapper, ContentWrapper } from "@/components/GlobalComponents"
 import styled from "styled-components"
 import { useRouter } from "next/navigation"
+import Image from "next/image"
+import closeIcon from "../../../../public/cross_thin.svg"
+import arrowRightIcon from "../../../../public/arrow_right.svg"
 
 const Training = () => {
   const router = useRouter()
@@ -41,7 +44,7 @@ const Training = () => {
         <TrainingWrapper>
           <QuestionSideWrapper>
             <div><p>1</p></div>
-            <div id="close" onClick={() => routerPush("/toeic_grammar")}><img src="/cross_thin.svg" alt="" /></div>
+            <div id="close" onClick={() => routerPush("/toeic_grammar")}><Image src={closeIcon} alt="" /></div>
           </QuestionSideWrapper>
           <QuestionWrapper id="question">
             The Weather in Merizo is very ------- year-round, though there are showers almost daily from December through March.
@@ -55,8 +58,9 @@ const Training = () => {
             </div>
             <div id="next-wrapper">
               {answered &&
-              <div id="next"><img src="/arrow_right.svg" alt="" /></div>}
-              
+              <div id="next">
+                <Image src={arrowRightIcon} alt="次の問題" />
+              </div>}
             </div>
           </ChoicesWrapper>
           <AnswerWrapper>
@@ -112,6 +116,7 @@ const QuestionSideWrapper = styled.div`
     }
     img {
       width: 20px;
+      height: auto;
       }
   }
 `
@@ -207,15 +212,21 @@ const ChoicesWrapper = styled.div<{ $canClick?: boolean }>`
       width: 50px;
       height: 50px;
       border-radius: 5px;
-      background-color: #ddd;
-      box-shadow: inset 0px 0px 8px rgba(0, 0, 0, 0.2);
+      background-color: #00ff7f;
+      box-shadow: 
+        0px 0px 8px rgba(0, 0, 0, 0.2),
+        inset 0px 0px 8px transparent;
       transition: all 0.2s ease-in-out;
       &:hover {
         cursor: pointer;
         background-color: #aaa;
+        box-shadow: 
+        0px 0px 8px transparent,
+        inset 0px 0px 8px rgba(0, 0, 0, 0.2);
       }
       img {
-        width: 60px;
+        width: 80px;
+        height: auto;
       }
     }
   }
