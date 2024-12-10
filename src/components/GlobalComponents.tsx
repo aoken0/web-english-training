@@ -13,7 +13,7 @@ const GlobalWrapper: React.FC<GlobalWrapperProps> = ({ header, children }) => {
 
   return (
     <Wrapper>
-      <Header>
+      <Header $header={header}>
         {header}
         <div>
           <button onClick={() => router.push("/")}>ログアウト</button>
@@ -54,11 +54,16 @@ const RContentWrapper: React.FC<SideContentWrapperProps> = ({ children }) => {
 }
 
 type ContentWrapperProps = {
-  children: React.ReactNode
+  children: React.ReactNode;
+  height?: string;
 }
-const ContentWrapper: React.FC<ContentWrapperProps> = ({ children }) => {
+const ContentWrapper: React.FC<ContentWrapperProps> = ({ children, height }) => {
+  if (!height) {
+    height = "auto";
+  }
+
   return (
-    <ContentWrapperStyled>
+    <ContentWrapperStyled $height={height}>
       {children}
     </ContentWrapperStyled>
   )
@@ -85,7 +90,7 @@ const Wrapper = styled.div`
   font-family: var(--font-roboto-regular), var(--font-noto-sans-jp), sans-serif;
 `
 
-const Header = styled.div`
+const Header = styled.div<{ $header: string }>`
   width: 80%;
   max-width: 960px;
   min-width: 600px;
@@ -94,7 +99,7 @@ const Header = styled.div`
   color: #222;
   padding: 30px 20px;
   font-size: 32px;
-  display: flex;
+  display: ${({ $header }) => $header !== "login" ? "flex" : "none"};
   justify-content: space-between;
   button {
     width: 120px;
@@ -142,13 +147,17 @@ const RContentWrapperStyled = styled.div`
   // background-color: #bbb;
 `
 
-const ContentWrapperStyled = styled.div`
+const ContentWrapperStyled = styled.div<{ $height: string }>`
   width: 80%;
+  height: ${({ $height }) => $height};
   max-width: 960px;
   min-width: 600px;
   margin: 0 auto;
   padding: 20px;
   color: #222;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 const BigButtonStyled = styled.button`
