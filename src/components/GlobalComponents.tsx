@@ -175,23 +175,24 @@ const ContentWrapperStyled = styled.div<{ $height: string }>`
 const BigButtonStyled = styled.button`
   width: 100%;
   max-width: 450px;
-  aspect-ratio: 3.8 / 1;
-  padding: 30px;
-  background-color: #fff;
+  height: 5em;
+  padding: 0 30px;
+  // background-color: #bbb;
+  color: #222;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   outline: none;
   box-shadow: 
-    0px 0px 10px rgba(0, 0, 0, 0.2),
+    0px 0px 10px rgba(0, 0, 0, 0.3),
     inset 0px 0px 10px transparent;
   transition: all .25s ease-in-out;
   &:hover {
     cursor: pointer;
     box-shadow: 
       0px 0px 10px transparent,
-      inset 0px 0px 10px rgba(0, 0, 0, 0.2);
+      inset 0px 0px 10px rgba(0, 0, 0, 0.3);
   }
   span {
-    font-size: 20px;
+    font-size: 18px;
   }
 `
