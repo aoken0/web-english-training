@@ -42,8 +42,8 @@ next-env.d.ts
 # cache
 .firebase/
 
-# data
-*.csv
+# csv
+/csv
 
 # testfile
 *test*
