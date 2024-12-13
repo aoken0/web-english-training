@@ -1,8 +1,9 @@
 'use client'
 import { GlobalWrapper, ContentWrapper } from "@/components/GlobalComponents"
 import styled from "styled-components"
-import { useState } from "react"
+import { use, useEffect, useState } from "react"
 import CsvUploader from "./components/CSVUploader"
+import * as dotenv from 'dotenv'
 
 const Admin = () => {
   const [currentMenuId, setCurrentMenuId] = useState<string>("")
@@ -12,9 +13,10 @@ const Admin = () => {
     { id: "sample", title: "サンプル" },
     { id: "テスト", title: "テスト" },
   ]
-
+  const password = process.env.NEXT_PUBLIC_ADMIN_PASSWORD
+  const [logined, setLogined] = useState<boolean>(false)
+  
   const handleClick = (id: string) => {
-    console.log(id)
     const element = document.getElementById(id)
     if (!element) return;
     element.style.backgroundColor = "#444"
@@ -38,27 +40,45 @@ const Admin = () => {
         return <div>テスト</div>
     }
   }
+  
+  const login = async () => {
+    console.log("ログイン処理開始")
+    if (logined) return
+    const inputPassword = prompt("パスワードを入力してください")
+    if (inputPassword === password) {
+      setLogined(true);
+    }
+    console.log("ログイン処理終了")
+  }
 
+  useEffect(() => {
+    login()
+  }, [])
+  
   return (
-    <GlobalWrapper header="Admin">
-      <ContentWrapper>
-        <AdminWrapper>
-          <AdminMenuWrapper>
-            <ul>
-              {adminMenu.map((menu) => (
-                <li key={menu.id} id={menu.id} onClick={() => handleClick(menu.id)}>
-                  {menu.title}
-                </li>
-              ))}
-            </ul>
-          </AdminMenuWrapper>
-          <AdminContentWrapper>
-            <h2>{currentMenuTitle}</h2>
-            {handleContent()}
-          </AdminContentWrapper>
-        </AdminWrapper>
-      </ContentWrapper>
-    </GlobalWrapper>
+    <>
+      {logined && (
+        <GlobalWrapper header="Admin">
+        <ContentWrapper>
+          <AdminWrapper>
+            <AdminMenuWrapper>
+              <ul>
+                {adminMenu.map((menu) => (
+                  <li key={menu.id} id={menu.id} onClick={() => handleClick(menu.id)}>
+                    {menu.title}
+                  </li>
+                ))}
+              </ul>
+            </AdminMenuWrapper>
+            <AdminContentWrapper>
+              <h2>{currentMenuTitle}</h2>
+              {handleContent()}
+            </AdminContentWrapper>
+          </AdminWrapper>
+        </ContentWrapper>
+      </GlobalWrapper>
+      )}
+    </>
   )
 }
 

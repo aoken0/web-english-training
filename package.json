@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "dotenv": "^16.4.7",
     "firebase": "^11.0.2",
     "firebase-tools": "^13.28.0",
     "global": "^4.4.0",
