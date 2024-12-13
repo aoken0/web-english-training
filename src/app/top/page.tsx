@@ -3,16 +3,16 @@ import styled from "styled-components"
 import "styled-reset"
 import { GlobalWrapper, LRContentWrapper, LContentWrapper, RContentWrapper, BigButton } from "@/components/GlobalComponents"
 import { useRouter } from "next/navigation"
+// import { useAuth }
 
 const Top = () => {
   const router = useRouter()
-
   const routerPush = (path: string) => {
     router.push(path)
   }
 
   return (
-    <GlobalWrapper header="Top">
+    <GlobalWrapper header="トップページ">
       <LRContentWrapper>
         <LContentWrapper>
           <BigButton text="TOEIC L&R テスト文法問題でる1000問" onClick={() => routerPush("/toeic_grammar")}></BigButton>

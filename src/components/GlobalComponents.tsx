@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useRouter } from "next/navigation";
+import { logout } from "@/api/logout";
 
 // Propsの型定義
 type GlobalWrapperProps = {
@@ -11,12 +12,21 @@ type GlobalWrapperProps = {
 const GlobalWrapper: React.FC<GlobalWrapperProps> = ({ header, children }) => {
   const router = useRouter();
 
+  const handleLogout = async () => {
+    try {
+      await logout();
+      router.push("/");
+    } catch (error) {
+      console.error("ログアウト失敗: ", error);
+    }
+  };
+
   return (
     <Wrapper>
       <Header $header={header}>
         {header}
         <div>
-          <button onClick={() => router.push("/")}>ログアウト</button>
+          <button onClick={() => handleLogout()}>ログアウト</button>
         </div>
       </Header>
       {children}
@@ -109,8 +119,10 @@ const Header = styled.div<{ $header: string }>`
     background-color: transparent;
     cursor: pointer;
     transition: all .25s ease-in-out;
+    font-size: 14px;
     &:hover {
-      background-color: #444;
+      background-color: #222;
+      font-weight: bold;
       color: #fff;
     }
   }

@@ -2,54 +2,31 @@
 import { GlobalWrapper, ContentWrapper } from "@/components/GlobalComponents";
 import styled from "styled-components";
 import { useRouter } from "next/navigation";
-import { auth } from "../../firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { useRef, useState } from "react";
-import { FirebaseError } from "firebase/app";
+import { loginWithEmail } from "@/api/login";
 
 export default function Home() {
   const router = useRouter();
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
-  const [errorMessage, setErrorMessage] = useState("");
-
-  const validateEmail = (email: string | null | undefined) => {
-    if (!email) return false;
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-  }
-  const validatePassword = (password: string | null | undefined) => {
-    if (!password) return false;
-    const regex = /^[^\s]{6,}$/
-    return regex.test(password);
-  }
+  const [result, setResult] = useState<{ error: boolean, message: string } | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      if (!validateEmail(emailRef.current?.value)) {
-        setErrorMessage("正しいメールアドレスを入力してください。")
-        return
-      }
-      if (!validatePassword(passwordRef.current?.value)) {
-        setErrorMessage("正しいパスワードを入力してください。")
-        return
-      }
-      const userCredential = await signInWithEmailAndPassword(auth, emailRef.current!.value, passwordRef.current!.value);
-      console.log("User signed in:", userCredential.user);
+      const result = await loginWithEmail(emailRef.current!.value, passwordRef.current!.value);
+      setResult(result);
+      if (result.error) throw new Error(result.message);
       router.push("/top");
-    } catch (e: unknown) {
-      if (e instanceof FirebaseError) {
-        console.log(e)
-      }
-      setErrorMessage("ログインに失敗しました。")
+    } catch (e) {
+      console.log(e);
     }
   }
 
   return (
     <GlobalWrapper header="login">
       <ContentWrapper height="100%">
-        <LoginWrapper $errorMessage={errorMessage}>
+        <LoginWrapper $errorMessage={result ? result.message : ""}>
           <form onSubmit={handleSubmit}>
             <input type="email" placeholder="メールアドレス" ref={emailRef} required />
             <input type="password" placeholder="パスワード" ref={passwordRef} required />
