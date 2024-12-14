@@ -73,4 +73,11 @@ compiler: {
 これによりstyledComponentsの使用、`yarn build`したときに`out`フォルダに実行物が出力ができるようになる。
 
 
+## firestore
+
+### historyコレクション
+* history (親collection)
+  * ユーザごとのdocument
+    * 問題集名のcollection
+      * 各問題番号: [解いた回数, ミス数]
 
