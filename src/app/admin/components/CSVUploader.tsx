@@ -65,7 +65,7 @@ const CsvUploader = () => {
         const data = results.data as string[][];
         try {
           for (const row of data) {
-            const dynamicData: { [key: string]: any } = {};
+            const dynamicData: { [key: string]: number | string } = {};
             for (let i = 0; i < columns.length; i++) {
               const columnName = columns[i].Name;
               const columnType = columns[i].Type;

@@ -1,5 +1,6 @@
 'use client'
 import { GlobalWrapper, LRContentWrapper, RContentWrapper, LContentWrapper, BigButton } from "@/components/GlobalComponents"
+import { SelectQuestionByNum } from "@/components/QuestionSelectArea"
 import styled from "styled-components"
 import { useRouter } from "next/navigation"
 import "styled-reset"
@@ -16,6 +17,7 @@ const ToeicGrammar = () => {
       <LRContentWrapper>
         <LContentWrapper>
           <BigButton text="問題番号を指定して出題" onClick={() => routerPush("/toeic_grammar/training")}></BigButton>
+          <SelectQuestionByNum questionQuantity={1049} interval={10} />
           <BigButton text="ランダム出題" onClick={() => {}}></BigButton>
         </LContentWrapper>
         <RContentWrapper>
