@@ -35,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ja">
       <body className={`${geistSans.variable} ${geistMono.variable} ${robotoRegular.variable} ${NotoSansJP.variable}`}>
         <AuthGuard>
           {children}
