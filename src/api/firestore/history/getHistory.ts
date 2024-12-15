@@ -15,7 +15,7 @@ const getHistory = async (email: string, workbookTitle: string) => {
     if (querySnapshot.size > 1) throw new Error("Multiple matching documents.");
 
     const result = await getSubDocumentsIfExists("history", workbookTitle, email);
-    const data = result.subcollection;
+    const data: HistoryObj[] = result.subcollection as HistoryObj[];
 
     return returnValue(false, "取得に成功しました。", data);
   } catch (e) {

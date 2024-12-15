@@ -1,4 +1,9 @@
 export type HistoryObj = {
   id: string,
-  data(): object
+  data(): HistoryData
 };
+
+export type HistoryData = {
+  attempt: number,
+  miss: number
+}
