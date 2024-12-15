@@ -23,6 +23,7 @@ yarn add styled-components
 yarn add papaparse
 yarn add @types/papaparse -D
 yarn add dotenv
+yarn add @tanstack/react-query@4
 ```
 
 ## firebase
