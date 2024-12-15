@@ -68,7 +68,7 @@ const QuestionAchivement: React.FC<Props> = ({ questionQuantity, data }) => {
         </table>
       </HistoryWrapper>
       <GraphWrapper>
-        <Graph $percent={`${progressRate}%`}><div></div><p>解答率</p></Graph>
+        <Graph $percent={`${progressRate}%`}><div></div><p>進捗率</p></Graph>
         <Graph $percent={`${hitRate}%`}><div></div><p>正答率</p></Graph>
       </GraphWrapper>
     </RContentArea>
