@@ -3,7 +3,6 @@ import { GlobalWrapper, LRContentWrapper, RContentWrapper, LContentWrapper, BigB
 import { SelectQuestionByNum } from "@/components/QuestionSelectArea"
 import styled from "styled-components"
 import { useRouter } from "next/navigation"
-import "styled-reset"
 
 const ToeicGrammar = () => {
   const router = useRouter()

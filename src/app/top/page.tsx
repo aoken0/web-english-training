@@ -1,6 +1,5 @@
 "use client"
 import styled from "styled-components"
-import "styled-reset"
 import { GlobalWrapper, LRContentWrapper, LContentWrapper, RContentWrapper, BigButton } from "@/components/GlobalComponents"
 import { useRouter } from "next/navigation"
 // import { useAuth }

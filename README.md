@@ -18,7 +18,6 @@ yarn install
 
 ### パッケージ
 ```
-yarn add styled-css
 yarn add styled-components
 yarn add papaparse
 yarn add @types/papaparse -D
