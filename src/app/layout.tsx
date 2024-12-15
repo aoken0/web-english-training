@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./reset.css";
 import "./globals.css";
 import AuthGuard from "../components/authGuard";
+import Providers from "@/components/providers";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -39,7 +40,9 @@ export default function RootLayout({
     <html lang="ja">
       <body className={`${geistSans.variable} ${geistMono.variable} ${robotoRegular.variable} ${NotoSansJP.variable}`}>
         <AuthGuard>
-          {children}
+          <Providers>
+            {children}
+          </Providers>
         </AuthGuard>
       </body>
     </html>

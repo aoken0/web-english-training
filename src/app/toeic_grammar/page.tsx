@@ -3,13 +3,53 @@ import { GlobalWrapper, LRContentWrapper, RContentWrapper, LContentWrapper, BigB
 import { SelectQuestionByNum } from "@/components/QuestionSelectArea"
 import styled from "styled-components"
 import { useRouter } from "next/navigation"
+import { useQuery } from "@tanstack/react-query"
+import { useAuth } from "@/utils/useAuth"
+import { User } from "firebase/auth"
+import getHistory from "@/api/firestore/history/getHistory"
+import initializeHistory from "@/api/firestore/history/initializeHistory"
+import { HistoryObj } from "@/types/history"
+
+const getHistoryOfQuestions = async ( user: User|null, workbookTitle: string ) => {
+  if (!user) return
+  if (!user.email) return
+  try {
+    const result = await getHistory(user.email, workbookTitle);
+    return result.data as HistoryObj[]
+  } catch (e) {
+    if (e instanceof Error) {
+      // ドキュメントが存在しないときは初期化する(初回アクセス時)
+      if (e.cause === "no-documents") {
+        try {
+          await initializeHistory(user.email, workbookTitle);
+          const result = await getHistory(user.email, workbookTitle);
+          return result.data as HistoryObj[]
+        } catch (e) {
+          console.log(e)
+        }
+      }
+    };
+  }
+}
+
 
 const ToeicGrammar = () => {
   const router = useRouter()
-
+  const { user } = useAuth();
+  const workbookTitle = "TOEICLRGrammar1000";
+  
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["history", workbookTitle, user?.email],
+    queryFn: () => getHistoryOfQuestions(user, workbookTitle),
+    enabled: !!user,
+  })
+  
   const routerPush = (path: string) => {
     router.push(path)
   }
+
+  if (isLoading) return <p>Loading...</p>;
+  if (isError) return <p>Error</p>;
 
   return (
     <GlobalWrapper header="TOEIC L&R テスト文法問題でる1000問">
@@ -19,6 +59,7 @@ const ToeicGrammar = () => {
           <SelectQuestionByNum questionQuantity={1049} interval={10} />
           <BigButton text="ランダム出題" onClick={() => {}}></BigButton>
         </LContentWrapper>
+        {/* <button onClick={() => getHistoryOfQuestions(user, workbookTitle)}>a</button> */}
         <RContentWrapper>
           <RContentArea>
             <HistoryWrapper>

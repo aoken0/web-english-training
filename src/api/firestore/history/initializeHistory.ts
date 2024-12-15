@@ -24,7 +24,7 @@ const chunk = (arr: Array<object>, size: number) =>
       (_, i) => arr.slice(i * size, i * size + size)
   );
 
-export const initializeHistory = async (email: string, workbookTitle: string) => {
+const initializeHistory = async (email: string, workbookTitle: string) => {
   const data: rowData[] = [];
   try {
     const q = query(collection(db, "history"), where("email", "==", email));
@@ -63,3 +63,5 @@ export const initializeHistory = async (email: string, workbookTitle: string) =>
     console.error("Error adding document: ", e);
   }
 }
+
+export default initializeHistory

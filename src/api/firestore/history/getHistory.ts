@@ -8,7 +8,6 @@ const returnValue = (error: boolean, message: string, data: HistoryObj[] ) => {
 }
 
 const getHistory = async (email: string, workbookTitle: string) => {
-  console.log(email)
   try {
     const q = query(collection(db, "history"), where("email", "==", email));
     const querySnapshot = await getDocs(q);

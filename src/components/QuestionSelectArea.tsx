@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useAuth } from "@/utils/useAuth";
 import getHistory from "@/api/firestore/history/getHistory";
-import { initializeHistory } from "@/api/firestore/history/initializeHistory";
+import initializeHistory from "@/api/firestore/history/initializeHistory";
 
 type SelectQuestionByNumProps = {
   questionQuantity: number,
