@@ -21,17 +21,18 @@ const makeStartEndArray = (max: number, interval: number) => {
 const SelectQuestionByNum: React.FC<SelectQuestionByNumProps> = ({ questionQuantity, interval }) => {
   const { user } = useAuth();
   const setArray = makeStartEndArray(questionQuantity, interval);
+  const workbookTitle = "TOEICLRGrammar1000";
 
   const getHistoryOfQuestions = async () => {
     if (!user) return
     if (!user.email) return
-    const result = await getHistory(user.email, "TOEICLRGrammar1000");
+    const result = await getHistory(user.email, workbookTitle);
     console.log(result);
   }
   const initializeHistoryOfQuestions = async () => {
     if (!user) return
     if (!user.email) return
-    await initializeHistory(user.email, "TOEICLRGrammar1000");
+    await initializeHistory(user.email, workbookTitle);
   }
 
   return (
