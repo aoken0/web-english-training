@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tanstack/react-query": "4",
     "dotenv": "^16.4.7",
     "firebase": "^11.0.2",
     "firebase-tools": "^13.28.0",
