@@ -32,6 +32,7 @@ export const initializeHistory = async (email: string, workbookTitle: string) =>
     if (querySnapshot.size !== 1) throw new Error;
     const parentDoc = querySnapshot.docs[0];
     const subcollectionRef = collection(parentDoc.ref, workbookTitle);
+    if (!subcollectionRef) throw new Error("サブコレクションの取得に失敗しました。");
     
     // サブコレクション配下にドキュメントが1つでもあれば中断
     const subcollectionSnapshot = await getDocs(subcollectionRef);
