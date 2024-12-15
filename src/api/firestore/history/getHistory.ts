@@ -1,13 +1,9 @@
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../../../../firebase";
-import getSubcollectionIfExists from "../utils/getSubDocumentsIfExists";
+import getSubDocumentsIfExists from "../utils/getSubDocumentsIfExists";
+import { HistoryObj } from "@/types/history";
 
-type objType = {
-  id: string,
-  data(): object
-};
-
-const returnValue = (error: boolean, message: string, data: objType[] ) => {
+const returnValue = (error: boolean, message: string, data: HistoryObj[] ) => {
   return { error: error, message: message, data: data };
 }
 
@@ -19,13 +15,14 @@ const getHistory = async (email: string, workbookTitle: string) => {
     if (querySnapshot.empty) throw new Error("No matching documents.");
     if (querySnapshot.size > 1) throw new Error("Multiple matching documents.");
 
-    const result = await getSubcollectionIfExists("history", workbookTitle, email);
-    if (result.error) throw new Error;
+    const result = await getSubDocumentsIfExists("history", workbookTitle, email);
     const data = result.subcollection;
 
     return returnValue(false, "取得に成功しました。", data);
   } catch (e) {
-    console.log(e)
+    if (e instanceof Error) {
+      throw e
+    }
     return returnValue(true, "取得に失敗しました。", []);
   }
 }
